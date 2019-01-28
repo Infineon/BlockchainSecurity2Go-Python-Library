@@ -1,4 +1,4 @@
-# Blockchain Security2GO Starkit library
+# Blockchain Security2GO Starterkit library
 
 __Warning:__ Still heavy WIP, all APIs may be subject to change!
 
@@ -11,7 +11,11 @@ with some simple functions.
 
 To use from the IFX network just install the package via pip
 
-   pip install git+https://bitbucket.vih.infineon.com/scm/~wallnean/python-blockchain2go.git
+    > pip install git+https://bitbucket.vih.infineon.com/scm/~wallnean/python-blockchain2go.git
+
+This will install the library, which can be imported as `blockchain2go`.
+In addition the `bc2go` command will be installed which can be used to communicate
+with the card from the command line.
 
 ## Testing
 
