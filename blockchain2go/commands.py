@@ -3,6 +3,29 @@ import logging
 logger = logging.getLogger(__name__)
 
 def select_app(reader):
+    """ Sends command to select the Blockchain Security2GO application
+
+    Needs to be called after reset to allow for access to
+    blockchain commands.
+
+    Returns:
+        :obj:`tuple`: (pin_active, card_id, version).
+        
+        pin_active:
+            bool: True if PIN is set on the card
+        
+        card_id:
+            bytes: 10 byte unique card identifier
+        
+        version:
+            str: card firmware version, following
+            semantic versioning.
+    
+    Raises:
+        CardError: If card indicates a failure.
+        
+        Any exceptions thrown by the reader wrapper are passed through.
+    """
     logger.debug('SELECT Blockchain Security2GO Starterkit')
     aid = bytes.fromhex('D2760000041502000100000001')
     r = reader.transceive(b'\x00\xA4\x04\x00', aid).check()
@@ -13,6 +36,26 @@ def select_app(reader):
     return (pin_active, card_id, version)
 
 def generate_keypair(reader):
+    """ Sends command to generate new keypair
+
+    A new keypair is generated and stored. The ID identifying this
+    keypair is returned. A key using the `secp256k1`_ curve is generated.
+
+    Args:
+        reader (:obj:): object providing reader communication
+
+    Returns:
+        int: ID of the just generated keypair, to be used e.g. for
+        future signatures using ``generate_signature``
+    
+    Raises:
+        CardError: If card indicates a failure, e.g. if card is full.
+        
+        Any exceptions thrown by the reader wrapper are passed through.
+    
+    .. _secp256k1:
+        http://www.secg.org/sec2-v2.pdf
+    """
     logger.debug('GENERATE KEYPAIR')
     r = reader.transceive(b'\x00\x02\x00\x00').check()
 
@@ -21,6 +64,40 @@ def generate_keypair(reader):
     return key_id
 
 def get_key_info(reader, key_id):
+    """ Sends command to retrieve keypair information
+
+    Args:
+        reader (:obj:): object providing reader communication
+        key_id (int): key ID as returned by ``generate_keypair``
+    
+    Returns:
+        :obj:`tuple`: (global_counter, counter, key)
+
+        global_counter:
+            int: overall remaining signatures for this card
+        
+        counter:
+            int: signatures remaining with key ``key_id``
+        
+        key:
+            bytes: public key, encoded uncompressed as
+            point according to `SEC1`_
+        
+        Uncompressed SEC1 encoding in short means that the key is
+        encoded to a 65 byte string. It consists of a 1 byte prefix
+        followed by the coordinates (first x then y) with a constant
+        length of 32 byte each.
+        The prefix is always 0x04, both coordinates are encoded as
+        unsigned integers, MSB first (big endian).
+    
+    Raises:
+        CardError: If card indicates a failure, e.g. if ID is invalid.
+        
+        Any exceptions thrown by the reader wrapper are passed through.
+    
+    .. _SEC1:
+        http://www.secg.org/sec1-v2.pdf
+    """
     logger.debug('GET KEY INFO key %d', key_id)
     if key_id < 0 or key_id > 255:
         raise RuntimeError('Invalid key_id: ' + str(key_id))
@@ -35,6 +112,43 @@ def get_key_info(reader, key_id):
     return (global_counter, counter, key)
 
 def generate_signature(reader, key_id, hash):
+    """ Send command to calculate signature
+
+    Signs a given hash using the specified key. The signature is
+    done using the sec256k1 curve, and DER encoded.
+    The returned signature is canonical, as described in `BIP 62`_.
+    Hashing needs to be done on the PC/terminal side, the card expects
+    already hashed data.
+
+    If a PIN is enabled on the card, a PIN session must be in
+    progress to use ``generate_key_from_seed``. See ``verify_pin``
+    for more information.
+
+    Args:
+        reader (:obj:): object providing reader communication
+        key_id (int): key ID as returned by ``generate_keypair``
+        hash (bytes): 32 byte long hash to sign
+    
+    Returns:
+        :obj:`tuple`: (global_counter, counter, signature)
+
+        global_counter:
+            int: overall remaining signatures for this card
+        
+        counter:
+            int: signatures remaining with key ``key_id``
+        
+        signature:
+            bytes: DER encoded signature
+    
+    Raises:
+        CardError: If card indicates a failure, e.g. if ID is invalid.
+        
+        Any exceptions thrown by the reader wrapper are passed through.
+
+    .. _BIP 62:
+        https://github.com/bitcoin/bips/blob/master/bip-0062.mediawiki
+    """
     logger.debug('GENERATE SIGNATURE key %d hash %s', key_id, hash.hex())
     if key_id < 0 or key_id > 255:
         raise RuntimeError('Invalid key_id: ' + str(key_id))
@@ -51,6 +165,34 @@ def generate_signature(reader, key_id, hash):
     return (global_counter, counter, signature)
 
 def generate_key_from_seed(reader, seed):
+    """ Sends command to derive key from given seed
+
+    The card will reproducibly generate a key from the
+    given seed. This allows the user to backup the seed
+    and provides a fallback in case of running our of
+    signatures or destruction of the card.
+    The key is generated using key derivation as defined
+    in `NIST SP 800-108`_ using CMAC-AES256 as defined in
+    `NIST SP 800-38B`_.
+
+    If a PIN is enabled on the card, a PIN session must be in
+    progress to use ``generate_key_from_seed``. See ``verify_pin``
+    for more information.
+
+    Args:
+        reader (:obj:): object providing reader communication
+        seed (bytes): 16 byte seed to use for key generation
+    
+    Raises:
+        CardError: If card indicates a failure, e.g. for invalid seed length.
+        
+        Any exceptions thrown by the reader wrapper are passed through.
+    
+    .. _NIST SP 800-108:
+        https://csrc.nist.gov/publications/detail/sp/800-108/final
+    .. _NIST SP 800-38B:
+        https://csrc.nist.gov/publications/detail/sp/800-38b/final
+    """
     logger.debug('GENERATE KEY FROM SEED seed %s', seed.hex())
     if len(seed) != 16:
         raise RuntimeError('Invalid seed length')
@@ -59,6 +201,24 @@ def generate_key_from_seed(reader, seed):
     logger.debug('success')
 
 def set_pin(reader, pin):
+    """ Send command to set a PIN
+
+    Sets a PIN as long as there is no PIN enabled currently.
+    Returns the PUK that is needed in the case of lockout
+    because of too many incorrect PIN entries.
+
+    Args:
+        reader (:obj:): object providing reader communication
+        pin (str): PIN to be used, will be used UTF-8 encoded
+    
+    Returns:
+        bytes: PUK value needed for unlock
+    
+    Raises:
+        CardError: If card indicates a failure, e.g. if there is alredy a PIN set.
+        
+        Any exceptions thrown by the reader wrapper are passed through.
+    """
     logger.debug('SET PIN pin %s', pin)
     r = reader.transceive(b'\x00\x40\x00\x00', pin.encode()).check()
 
@@ -66,10 +226,30 @@ def set_pin(reader, pin):
     return r.resp
 
 def change_pin(reader, current_pin, new_pin):
+    """ Send command to modify existing PIN
+
+    Changes the PIN if a PIN is currently enabled.
+    Returns a new PUK that is needed in the case of lockout
+    because of too many incorrect PIN entries.
+
+    Args:
+        reader (:obj:): object providing reader communication
+        current_pin (str): current PIN, will be used UTF-8 encoded
+        new_pin (str): new PIN to set, will be used UTF-8 encoded
+    
+    Returns:
+        bytes: PUK value needed for unlock
+    
+    Raises:
+        CardError: If card indicates a failure, e.g. if too many incorrect
+        PUK entry tries alrady occured and card is locked permanently.
+        
+        Any exceptions thrown by the reader wrapper are passed through.
+    """
     logger.debug('CHANGE PIN from %s to %s', current_pin, new_pin)
-    if len(current_pin) > 255:
+    if len(current_pin.encode()) > 255:
         raise RuntimeError('Invalid length for current PIN')
-    if len(new_pin) > 255:
+    if len(new_pin.encode()) > 255:
         raise RuntimeError('Invalid length for new PIN')
 
     data = bytes([len(current_pin)]) + current_pin.encode()
@@ -80,6 +260,25 @@ def change_pin(reader, current_pin, new_pin):
     return r.resp
 
 def verify_pin(reader, pin):
+    """ Sends command to verify PIN and unlock commands
+
+    If the provided PIN is correct, this starts a PIN
+    session. An ongoing PIN session allows to use protected
+    commands until the next reset/select command (``select_app``).
+
+    Args:
+        reader (:obj:): object providing reader communication
+        pin (str)
+    
+    Returns:
+
+    Raises:
+        CardError: If card indicates a failure, e.g. if too many incorrect
+        PIN entry tries alrady occured and card is locked.
+        
+        Any exceptions thrown by the reader wrapper are passed through.
+    """
+    # TODO fix interface, do not return bool or int depening on success/failure
     logger.debug('VERIFY PIN pin %s', pin)
     r = reader.transceive(b'\x00\x44\x00\x00', pin.encode())
 
@@ -95,6 +294,25 @@ def verify_pin(reader, pin):
     r.check()
 
 def unlock_pin(reader, puk):
+    """ Send command to unlock PIN using PUK
+
+    If too many incorrect PIN entries occured and the card is locked
+    it can be unlocked using the PUK returned while setting the PIN.
+
+    Args:
+        reader (:obj:): object providing reader communication
+        pin (bytes): as returned from ``set_pin`` or ``change_pin``
+    
+    Returns:
+        ...
+    
+    Raises:
+        CardError: If card indicates a failure, e.g. if too many incorrect
+        PIN entry tries alrady occured and card is locked.
+        
+        Any exceptions thrown by the reader wrapper are passed through.
+    """
+    # TODO fix interface, do not return bool or int depening on success/failure
     logger.debug('UNLOCK PIN puk %s', puk.hex())
     r = reader.transceive(b'\x00\x46\x00\x00', puk)
     

@@ -24,3 +24,5 @@ Library usage:
     All supported commands can then be sent using the functions
     from the ``blockchain2go.commands`` module.
 """
+from blockchain2go.commands import *
+from blockchain2go.comm import *
