@@ -3,11 +3,11 @@ import json
 import argparse
 
 from blockchain2go.comm import open_pyscard, CardError
-from blockchain2go.commands import select, generate_keypair
+from blockchain2go.commands import select_app, generate_keypair
 
 def _generate_keypair(args):
   reader = open_pyscard(args.reader)
-  select(reader)
+  select_app(reader)
   key_id = generate_keypair(reader)
 
   if args.machine_readable:

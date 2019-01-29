@@ -3,11 +3,11 @@ import json
 import argparse
 
 from blockchain2go.comm import open_pyscard, CardError
-from blockchain2go.commands import select, set_pin
+from blockchain2go.commands import select_app, set_pin
 
 def _set_pin(args):
   reader = open_pyscard(args.reader)
-  select(reader)
+  select_app(reader)
   puk = set_pin(reader, args.pin)
 
   if args.machine_readable:

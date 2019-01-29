@@ -3,11 +3,11 @@ import json
 import argparse
 
 from blockchain2go.comm import open_pyscard, CardError
-from blockchain2go.commands import select
+from blockchain2go.commands import select_app
 
 def _card_info(args):
   reader = open_pyscard(args.reader)
-  (pin_active, card_id, version) = select(reader)
+  (pin_active, card_id, version) = select_app(reader)
 
   if args.machine_readable:
     json.dump({

@@ -3,11 +3,11 @@ import json
 import argparse
 
 from blockchain2go.comm import open_pyscard, CardError
-from blockchain2go.commands import select, get_key_info
+from blockchain2go.commands import select_app, get_key_info
 
 def _get_key_info(args):
   reader = open_pyscard(args.reader)
-  select(reader)
+  select_app(reader)
   (global_counter, counter, key) = get_key_info(reader, args.key_id)
 
   if args.machine_readable:

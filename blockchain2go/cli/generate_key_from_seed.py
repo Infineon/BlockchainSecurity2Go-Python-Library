@@ -3,12 +3,12 @@ import json
 import argparse
 
 from blockchain2go.comm import open_pyscard, CardError
-from blockchain2go.commands import select, verify_pin, generate_key_from_seed
+from blockchain2go.commands import select_app, verify_pin, generate_key_from_seed
 from blockchain2go.util import bytes_from_hex
 
 def _generate_key_from_seed(args):
   reader = open_pyscard(args.reader)
-  select(reader)
+  select_app(reader)
   if args.pin is not None:
     verify_pin(reader, args.pin)
   generate_key_from_seed(reader, args.seed)
