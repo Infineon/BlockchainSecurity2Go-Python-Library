@@ -1,4 +1,4 @@
-errors = {
+ERRORS = {
   0x6700: 'Invalid length',
   0x6983: 'Authentication failed - Locked',
   0x6985: 'Condition of use not satisfied - no active PIN session/invalid PIN state for command',
@@ -35,6 +35,9 @@ class ApduResponse:
     self.resp = resp
     self.sw = sw
 
+  def __bool__(self):
+    return self.sw == 0x9000
+
   def check(self):
     if self.sw != 0x9000:
         raise CardError('card indicated failure', self)
@@ -46,8 +49,8 @@ class ApduResponse:
       text = 'Authentication failed - {} tries remaining'.format(self.sw & 0xF)
     elif (self.sw & 0xFF00) == 0x6400:
       text = 'Operation failed - fatal error {}'.format(self.sw & 0xFF)
-    elif self.sw in errors:
-      text = errors[self.sw]
+    elif self.sw in ERRORS:
+      text = ERRORS[self.sw]
     
     return 'response ' + self.resp.hex() + ' (' + str(len(self.resp)) + ') ' + hex(self.sw) + ' ' + text
 
@@ -63,7 +66,7 @@ class Apdu:
     self.data = data
     self.le = le
 
-  def toBytes(self):
+  def __bytes__(self):
     apdu = b''
     apdu += self.header
     if len(self.data) > 0:

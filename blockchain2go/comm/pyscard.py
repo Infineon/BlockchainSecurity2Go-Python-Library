@@ -13,13 +13,9 @@ class PySCardReader:
   def transceive(self, header, data = b'', le = -1):
     apdu = Apdu(header, data, le)
     logger.info(apdu)
-    resp = self._transceive(apdu.toBytes())
+    resp = self._transceive(bytes(apdu))
     logger.info(resp)
     return resp
-
-  def _transceive(self, apdu):
-    resp, sw1, sw2 = self.connection.transmit(array.array('b', apdu).tolist())
-    return ApduResponse(array.array('B', resp).tobytes(), (sw1 << 8) + sw2)
 
 def open_pyscard(name):
   return PySCardReader(PCSCReader(name).createConnection())
