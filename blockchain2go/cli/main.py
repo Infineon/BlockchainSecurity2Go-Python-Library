@@ -24,7 +24,8 @@ def main(argv=None):
     )
 
     from blockchain2go.cli import (generate_signature, generate_keypair, get_key_info,
-        list_readers, card_info, generate_key_from_seed, set_pin, change_pin, unlock_pin)
+        list_readers, card_info, generate_key_from_seed, set_pin, change_pin, unlock_pin,
+        disable_pin)
     generate_signature.add_subcommand(subparsers)
     generate_keypair.add_subcommand(subparsers)
     get_key_info.add_subcommand(subparsers)
@@ -34,6 +35,7 @@ def main(argv=None):
     set_pin.add_subcommand(subparsers)
     change_pin.add_subcommand(subparsers)
     unlock_pin.add_subcommand(subparsers)
+    disable_pin.add_subcommand(subparsers)
 
     args = parser.parse_args(args)
     if hasattr(args, 'func'):
