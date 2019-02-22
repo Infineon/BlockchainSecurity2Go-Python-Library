@@ -21,6 +21,10 @@ class PySCardReader:
         logger.debug(resp)
         return resp
 
+    def _transceive(self, data):
+        resp, sw1, sw2 = self.connection.transmit(array.array('b', data).tolist())
+        return ApduResponse(array.array('B', resp).tobytes(), (sw1 << 8) + sw2)
+
 def open_pyscard(name):
     """ Open PC/SC reader using PyScard
 
