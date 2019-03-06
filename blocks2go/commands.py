@@ -26,7 +26,7 @@ def select_app(reader):
         
         Any exceptions thrown by the reader wrapper are passed through.
     """
-    logger.debug('SELECT Blockchain Security2GO Starterkit')
+    logger.debug('SELECT Blockchain Security 2Go starter kit')
     aid = bytes.fromhex('D2760000041502000100000001')
     r = reader.transceive(b'\x00\xA4\x04\x00', aid).check()
 
