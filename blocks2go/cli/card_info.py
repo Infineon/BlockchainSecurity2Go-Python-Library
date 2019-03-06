@@ -2,11 +2,15 @@ import sys
 import json
 import argparse
 
-from blocks2go.comm import open_pyscard, CardError
+from blocks2go.comm import open_pyscard, open_pyscard_autoreader, CardError
 from blocks2go.commands import select_app
 
 def _card_info(args):
-	reader = open_pyscard(args.reader)
+	if args.reader is not None:
+		reader = open_pyscard(args.reader)
+	else:
+	    (reader, _) = open_pyscard_autoreader()
+
 	(pin_active, card_id, version) = select_app(reader)
 
 	if args.machine_readable:

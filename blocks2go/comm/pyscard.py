@@ -1,5 +1,6 @@
 import array
 import logging
+import smartcard.System
 from smartcard.pcsc.PCSCReader import PCSCReader
 from blocks2go.comm.base import Apdu, ApduResponse
 
@@ -38,3 +39,25 @@ def open_pyscard(name):
         Various PyScard exceptions
     """
     return PySCardReader(PCSCReader(name).createConnection())
+
+def open_pyscard_autoreader():
+    """ Search for a reader with a card and select it
+
+    Returns:
+        :obj:`PyScardReader`: PyScard wrapper object
+    
+    Raises:
+        Various RuntimeError if no reader with card is found
+    """
+
+    readers = smartcard.System.readers()
+    for reader in readers:
+      try:
+          pyscardreader = open_pyscard(reader)
+      except:
+        pass
+      else:
+        logger.debug("Choose reader %s", reader)
+        return (pyscardreader, reader)
+
+    raise RuntimeError('No reader with card found')
