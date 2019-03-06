@@ -8,10 +8,10 @@ setup(
   version='0.1',
   author='Infineon Technologies AG',
   author_email='?',
-  description='Allow for communication with the Infineon Blockchain Security2GO Starterkit',
+  description='Allow for communication with the Infineon Blockchain Security 2Go starter kit',
   long_description=long_description,
   long_description_content_type='text/markdown',
-  url='http://github.com/infineon/python-blockchain2go',
+  url='http://github.com/infineon/PyBlockS2Go',
   license='MIT',
   packages=find_packages(),
   install_requires=[
@@ -19,7 +19,7 @@ setup(
   ],
   entry_points={
     'console_scripts': [
-      'bc2go = blockchain2go.cli.main:main',
+      'blocks2go = blocks2go.cli.main:main',
     ],
   },
   classifiers=[
