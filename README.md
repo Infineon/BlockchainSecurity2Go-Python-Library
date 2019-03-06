@@ -1,20 +1,25 @@
 # Blockchain Security 2Go starter kit Python library
 
-This package provides basic functions to communicate with Infineon's Blockchain Security 2Go starter kit. It abstracts all of the commands available with the starter kit
-with some simple functions. 
+This package provides basic functions to communicate with Infineon's Blockchain Security 2Go 
+starter kit. It abstracts all of the commands available with the starter kit with some simple 
+functions. 
 
 To get more information about the starter kit go to [https://github.com/Infineon/blockchain].
 
 ## Getting Started
 To use this library you need some hardware first:
-* A smart card from Infineon's Blockchain Security 2Go starter kit (see [here](https://www.infineon.com/blockchain) for information about how to get it), and
-* a contactless reader to communicate with the contactless smart card. We recommend to use a reader that is connected via USB (a list is available at [ccid.apdu.fr](https://ccid.apdu.fr/select_readers/?features=contactless)). 
+* A smart card from Infineon's Blockchain Security 2Go starter kit 
+(see [here](https://www.infineon.com/blockchain) for information about how to get it), and
+* a contactless reader to communicate with the contactless smart card. We recommend to use 
+a reader that is connected via USB (a list is available at 
+[ccid.apdu.fr](https://ccid.apdu.fr/select_readers/?features=contactless)). 
 
 The fastest way to install the library is to get it via pip
     $ pip install blocks2go
 
 This will install the library, which can be imported as `blocks2go`.
-In addition the `blocks2go` command will be installed which can be used to communicate with the card from the command line.
+In addition the `blocks2go` command will be installed which can be used to communicate with 
+the card from the command line.
 
 ## Usage Example
 <!-- TODO -->
