@@ -28,6 +28,8 @@ class PySCardReader:
 
 def open_pyscard(name):
     """ Open PC/SC reader using PyScard
+        If no reader name is given, try to open all available readers, 
+        the first one that succeeds is chosen.
 
     Args:
         name (:obj:`str`): name of the reader as registered in the system
@@ -36,6 +38,7 @@ def open_pyscard(name):
         :obj:`PyScardReader`: PyScard wrapper object
     
     Raises:
+        RuntimeError exception if no reader can be opened
         Various PyScard exceptions
     """
     if name is not None:
