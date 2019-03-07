@@ -3,6 +3,8 @@ import logging
 import argparse
 import json
 
+from blocks2go.comm.base import CardError
+
 def main(argv=None):
     if argv == None:
         argv = sys.argv
@@ -44,6 +46,9 @@ def main(argv=None):
         try:
             args.func(args)
             return 0
+        except CardError as e:
+            print(str(e))
+            return -1
         except Exception as e:
             if args.machine_readable:
                 json.dump({'status': 'error', 'error': str(e)}, fp=sys.stdout)

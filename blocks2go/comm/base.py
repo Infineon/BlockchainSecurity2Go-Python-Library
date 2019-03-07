@@ -51,7 +51,7 @@ class CardError(Exception):
     def __str__(self):
         string = self.message
         if self.explanation is not None:
-            string += ': ' + self.explanation
+            string += str(self.explanation)
         if self.response is not None:
             string += ' (' + str(self.response) + ')'
         return string
@@ -80,7 +80,7 @@ class ApduResponse:
 
     def check(self):
         if self.sw != 0x9000:
-                raise CardError('card indicated failure', self)
+                raise CardError('Card indicated failure: ', self)
         return self
     
     def __str__(self):
@@ -92,7 +92,7 @@ class ApduResponse:
         elif self.sw in _ERRORS:
             text = _ERRORS[self.sw]
         
-        return 'response ' + self.resp.hex() + ' (' + str(len(self.resp)) + ') ' + hex(self.sw) + ' ' + text
+        return hex(self.sw) + ' ' + text
     
     def __repr__(self):
         return 'ApduResponse(' + repr(self.resp) + ', ' + repr(self.sw) + ')'
