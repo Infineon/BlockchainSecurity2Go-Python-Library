@@ -38,26 +38,17 @@ def open_pyscard(name):
     Raises:
         Various PyScard exceptions
     """
-    return PySCardReader(PCSCReader(name).createConnection())
+    if name is not None:
+        return PySCardReader(PCSCReader(name).createConnection())
+    else:
+        readers = smartcard.System.readers()
+        for reader in readers:
+            try:
+                pyscardreader = PySCardReader(PCSCReader(reader).createConnection())
+            except:
+                pass
+            else:
+                logger.debug("Open reader: %s", reader)
+                return pyscardreader
 
-def open_pyscard_autoreader():
-    """ Search for a reader with a card and select it
-
-    Returns:
-        :obj:`PyScardReader`: PyScard wrapper object
-    
-    Raises:
-        Various RuntimeError if no reader with card is found
-    """
-
-    readers = smartcard.System.readers()
-    for reader in readers:
-      try:
-          pyscardreader = open_pyscard(reader)
-      except:
-        pass
-      else:
-        logger.debug("Choose reader %s", reader)
-        return (pyscardreader, reader)
-
-    raise RuntimeError('No reader with card found')
+        raise RuntimeError('No reader with Blockchain Security 2Go card found. Available readers: ', readers)
