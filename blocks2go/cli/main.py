@@ -24,13 +24,13 @@ def main(argv=None):
     )
 
     from blocks2go.cli import (generate_signature, generate_keypair, get_key_info,
-        list_readers, card_info, generate_key_from_seed, set_pin, change_pin, unlock_pin,
+        list_readers, get_card_info, generate_key_from_seed, set_pin, change_pin, unlock_pin,
         disable_pin)
     generate_signature.add_subcommand(subparsers)
     generate_keypair.add_subcommand(subparsers)
     get_key_info.add_subcommand(subparsers)
     list_readers.add_subcommand(subparsers)
-    card_info.add_subcommand(subparsers)
+    get_card_info.add_subcommand(subparsers)
     generate_key_from_seed.add_subcommand(subparsers)
     set_pin.add_subcommand(subparsers)
     change_pin.add_subcommand(subparsers)
