@@ -21,8 +21,33 @@ This will install the library, which can be imported as `blocksec2go`.
 In addition the `blocksec2go` command will be installed which can be used to communicate with 
 the card from the command line.
 
+To find out more, run
+
+    $ blocksec2go --help
+
 ## Usage Example
-<!-- TODO -->
+### Python Library
+Go to the (Blockchain Security 2Go repository)[https://github.com/Infineon/Blockchain/pc] to find examples of how to use the Python library.
+
+### Command Line Tool
+Here is an example of how the command line tool could be used
+
+    $ blocksec2go get_card_info
+      PIN is: disabled
+	  Card ID (hex): 02058d190004001a002d
+	  Version: v1.0
+
+	$ blocksec2go set_pin 1234
+	  PUK to unlock card (hex): 5c88ce829a2ed32c
+
+	$ blocksec2go generate_keypair
+	  Key ID: 1
+
+	$ blocksec2go generate_signature --pin 1234 1 00112233445566778899AABBCCDDEEFF00112233445566778899AABBCCDDEEFF
+	  Remaining signatures with card: 999990
+      Remaining signatures with key 1: 99999
+      Signature (hex): 3044022049689b91545ba3bc487af7cb7267d19ea4ad8e2e8b093458e06d46837400444702207fe7cd2b6851049afe0f7c4ced0ef35bd9eb5d044c67ed95045b07a10641806c
+
 
 ## Testing
 
