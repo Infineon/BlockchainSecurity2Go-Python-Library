@@ -26,7 +26,7 @@ class PySCardReader:
         resp, sw1, sw2 = self.connection.transmit(array.array('b', data).tolist())
         return ApduResponse(array.array('B', resp).tobytes(), (sw1 << 8) + sw2)
 
-def open_pyscard(name):
+def open_pyscard(name=None):
     """ Open PC/SC reader using PyScard
         If no reader name is given, try to open all available readers, 
         the first one that succeeds is chosen.
