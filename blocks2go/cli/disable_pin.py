@@ -18,6 +18,6 @@ def _disable_pin(args):
         print('OK - unlocked')
 
 def add_subcommand(subparsers):
-    parser = subparsers.add_parser('disable_pin', description='Disable the PIN on a card')
+    parser = subparsers.add_parser('disable_pin', description='Disable PIN on a card')
     parser.set_defaults(func=_disable_pin)
     parser.add_argument('pin', help='current PIN')
