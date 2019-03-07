@@ -14,17 +14,6 @@ _ERRORS = {
     0x9000: 'Success',
 }
 
-def _get_error_explanation(sw):
-    if sw is None:
-        return None
-    if (sw & 0xFFF0) == 0x63C0:
-        return'Authentication failed - {} tries remaining'.format(self.sw & 0xF)
-    elif (sw & 0xFF00) == 0x6400:
-        return 'Operation failed - fatal error {}'.format(self.sw & 0xFF)
-    elif self.sw in _ERRORS:
-        return _ERRORS[self.sw]
-    return None
-
 class CardError(Exception):
     """ Exception if card indicates failure
 
@@ -40,20 +29,22 @@ class CardError(Exception):
         explanation (str): error explanation if available
         response (int): returned status word of card
     """
-    def __init__(self, message, explanation=None, response=None):
+    def __init__(self, message, response, explanation=None):
+        super(CardError, self).__init__(message)
         self.message = message
         self.explanation = explanation
-        if explanation is None and response is not None:
-            self.explanation = _get_error_explanation(response.sw)
         self.response = response
-        super(CardError, self).__init__(self.message)
     
     def __str__(self):
         string = self.message
         if self.explanation is not None:
             string += str(self.explanation)
         if self.response is not None:
-            string += ' (' + str(self.response) + ')'
+            if self.explanation is not None:
+                string += ' ('
+            string += str(self.response)
+            if self.explanation is not None:
+                string += ')'
         return string
 
     def __repr__(self):
@@ -80,7 +71,7 @@ class ApduResponse:
 
     def check(self):
         if self.sw != 0x9000:
-                raise CardError('Card indicated failure: ', self)
+            raise CardError('Card indicated failure: ', response=self)
         return self
     
     def __str__(self):

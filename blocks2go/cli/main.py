@@ -47,7 +47,10 @@ def main(argv=None):
             args.func(args)
             return 0
         except CardError as e:
-            print(str(e))
+            if args.machine_readable:
+                json.dump({'status': 'CardError', 'error': e.response.sw}, fp=sys.stdout)
+            else: 
+                print(str(e))
             return -1
         except Exception as e:
             if args.machine_readable:

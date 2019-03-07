@@ -54,4 +54,4 @@ def open_pyscard(name=None):
                 logger.debug("Open reader: %s", reader)
                 return pyscardreader
 
-        raise RuntimeError('No reader with Blockchain Security 2Go card found. Available readers: ', readers)
+        raise RuntimeError('No reader with card found. Available readers: ', readers)
