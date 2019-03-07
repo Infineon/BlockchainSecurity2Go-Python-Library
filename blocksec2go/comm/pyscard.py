@@ -2,12 +2,12 @@ import array
 import logging
 import smartcard.System
 from smartcard.pcsc.PCSCReader import PCSCReader
-from blocks2go.comm.base import Apdu, ApduResponse
+from blocksec2go.comm.base import Apdu, ApduResponse
 
 logger = logging.getLogger(__name__)
 
 class PySCardReader:
-    """ Wrapper to use PyScard with blocks2go
+    """ Wrapper to use PyScard with blocksec2go
     
     Abstracts communication into a simple function
     """

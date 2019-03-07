@@ -4,14 +4,14 @@ with open('README.md', 'r') as fh:
   long_description = fh.read()
 
 setup(
-  name='blockchain-security2go-starterkit',
+  name='blockchain-security-2go-starterkit',
   version='1.0',
   author='Infineon Technologies AG',
   author_email='blockchain@infineon.com',
-  description='Allow for communication with the Infineon Blockchain Security 2Go starter kit',
+  description='Allow for communication with Infineon\'s Blockchain Security 2Go starter kit',
   long_description=long_description,
   long_description_content_type='text/markdown',
-  url='http://github.com/infineon/PyBlockS2Go',
+  url='http://github.com/Infineon/PyBlockSec2Go',
   license='MIT',
   packages=find_packages(),
   install_requires=[
@@ -19,7 +19,7 @@ setup(
   ],
   entry_points={
     'console_scripts': [
-      'blocks2go = blocks2go.cli.main:main',
+      'blocksec2go = blocksec2go.cli.main:main',
     ],
   },
   classifiers=[

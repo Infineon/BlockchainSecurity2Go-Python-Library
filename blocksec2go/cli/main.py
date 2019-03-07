@@ -3,7 +3,7 @@ import logging
 import argparse
 import json
 
-from blocks2go.comm.base import CardError
+from blocksec2go import CardError
 
 def main(argv=None):
     if argv == None:
@@ -25,7 +25,7 @@ def main(argv=None):
         choices=['debug', 'info', 'warning', 'error', 'critical', 'nolog'],
     )
 
-    from blocks2go.cli import (generate_signature, generate_keypair, get_key_info,
+    from blocksec2go.cli import (generate_signature, generate_keypair, get_key_info,
         list_readers, get_card_info, encrypted_keyimport, set_pin, change_pin, unlock_pin,
         disable_pin)
     generate_signature.add_subcommand(subparsers)

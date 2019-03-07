@@ -2,8 +2,8 @@ import sys
 import json
 import argparse
 
-from blocks2go.comm import open_pyscard, CardError
-from blocks2go.commands import select_app, get_key_info
+from blocksec2go.comm import open_pyscard, CardError
+from blocksec2go.commands import select_app, get_key_info
 
 def _get_key_info(args):
     reader = open_pyscard(args.reader)

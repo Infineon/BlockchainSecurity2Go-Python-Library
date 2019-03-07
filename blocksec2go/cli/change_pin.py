@@ -2,8 +2,8 @@ import sys
 import json
 import argparse
 
-from blocks2go import open_pyscard, CardError
-from blocks2go import select_app, change_pin
+from blocksec2go import open_pyscard, CardError
+from blocksec2go import select_app, change_pin
 
 def _change_pin(args):
 	reader = open_pyscard(args.reader)

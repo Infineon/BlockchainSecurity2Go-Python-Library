@@ -15,10 +15,10 @@ a reader that is connected via USB (a list is available at
 [ccid.apdu.fr](https://ccid.apdu.fr/select_readers/?features=contactless)). 
 
 The fastest way to install the library is to get it via pip
-    $ pip install blocks2go
+    $ pip install blocksec2go
 
-This will install the library, which can be imported as `blocks2go`.
-In addition the `blocks2go` command will be installed which can be used to communicate with 
+This will install the library, which can be imported as `blocksec2go`.
+In addition the `blocksec2go` command will be installed which can be used to communicate with 
 the card from the command line.
 
 ## Usage Example
@@ -44,9 +44,9 @@ To exit the environment, simply run
 <!--
 To use from the IFX network just install the package via pip
 
-    $ pip install git+https://bitbucket.vih.infineon.com/scm/~wallnean/python-blocks2go.git
+    $ pip install git+https://bitbucket.vih.infineon.com/scm/~wallnean/python-blocksec2go.git
 
-This will install the library, which can be imported as `blocks2go`.
+This will install the library, which can be imported as `blocksec2go`.
 In addition the `bc2go` command will be installed which can be used to communicate
 with the card from the command line.
 To find out more, run
