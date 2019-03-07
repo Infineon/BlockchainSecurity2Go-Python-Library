@@ -43,6 +43,11 @@ Here is an example of how the command line tool could be used
 	$ blocksec2go generate_keypair
 	  Key ID: 1
 
+	$ blocksec2go get_key_info 1
+	  Remaining signatures with card: 999990
+      Remaining signatures with key 1: 0
+      Public key (hex, encoded according to SEC1): 0434cfd6b1bb53fc244d4881cf1f0d3b9aee7b6ac28aad8a1648fc514101961b59fa7fc58751d0dc876589e467a63ed1582e240cd18b98d408470679418a647833
+
 	$ blocksec2go generate_signature --pin 1234 1 00112233445566778899AABBCCDDEEFF00112233445566778899AABBCCDDEEFF
 	  Remaining signatures with card: 999990
       Remaining signatures with key 1: 99999
