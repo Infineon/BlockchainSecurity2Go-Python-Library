@@ -41,7 +41,6 @@ def main(argv=None):
     if hasattr(args, 'func'):
         if args.loglevel != 'nolog':
             logging.basicConfig(level=args.loglevel.upper())
-
         try:
             args.func(args)
             return 0
