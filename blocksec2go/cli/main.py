@@ -3,6 +3,8 @@ import logging
 import argparse
 import json
 
+from blocksec2go import CardError
+
 def main(argv=None):
     if argv == None:
         argv = sys.argv
@@ -23,15 +25,15 @@ def main(argv=None):
         choices=['debug', 'info', 'warning', 'error', 'critical', 'nolog'],
     )
 
-    from blocks2go.cli import (generate_signature, generate_keypair, get_key_info,
-        list_readers, card_info, generate_key_from_seed, set_pin, change_pin, unlock_pin,
+    from blocksec2go.cli import (generate_signature, generate_keypair, get_key_info,
+        list_readers, get_card_info, encrypted_keyimport, set_pin, change_pin, unlock_pin,
         disable_pin)
     generate_signature.add_subcommand(subparsers)
     generate_keypair.add_subcommand(subparsers)
     get_key_info.add_subcommand(subparsers)
     list_readers.add_subcommand(subparsers)
-    card_info.add_subcommand(subparsers)
-    generate_key_from_seed.add_subcommand(subparsers)
+    get_card_info.add_subcommand(subparsers)
+    encrypted_keyimport.add_subcommand(subparsers)
     set_pin.add_subcommand(subparsers)
     change_pin.add_subcommand(subparsers)
     unlock_pin.add_subcommand(subparsers)
@@ -41,10 +43,15 @@ def main(argv=None):
     if hasattr(args, 'func'):
         if args.loglevel != 'nolog':
             logging.basicConfig(level=args.loglevel.upper())
-
         try:
             args.func(args)
             return 0
+        except CardError as e:
+            if args.machine_readable:
+                json.dump({'status': 'CardError', 'error': e.response.sw}, fp=sys.stdout)
+            else: 
+                print(str(e))
+            return -1
         except Exception as e:
             if args.machine_readable:
                 json.dump({'status': 'error', 'error': str(e)}, fp=sys.stdout)

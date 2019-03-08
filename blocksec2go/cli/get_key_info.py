@@ -2,8 +2,8 @@ import sys
 import json
 import argparse
 
-from blocks2go.comm import open_pyscard, CardError
-from blocks2go.commands import select_app, get_key_info
+from blocksec2go.comm import open_pyscard, CardError
+from blocksec2go import select_app, get_key_info
 
 def _get_key_info(args):
     reader = open_pyscard(args.reader)
@@ -20,7 +20,7 @@ def _get_key_info(args):
     else:
         print('Remaining signatures with card: {}'.format(global_counter))
         print('Remaining signatures with key {}: {}'.format(args.key_id, counter))
-        print('Key (hex, encoded according to SEC1): ' + key.hex())
+        print('Public key (hex, encoded according to SEC1): ' + key.hex())
 
 def add_subcommand(subparsers):
     parser = subparsers.add_parser('get_key_info', description='Get public key and signature counters')

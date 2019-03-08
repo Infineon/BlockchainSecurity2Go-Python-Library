@@ -1,5 +1,4 @@
 import logging
-
 logger = logging.getLogger(__name__)
 
 def select_app(reader):
@@ -26,7 +25,7 @@ def select_app(reader):
         
         Any exceptions thrown by the reader wrapper are passed through.
     """
-    logger.debug('SELECT Blockchain Security2GO Starterkit')
+    logger.debug('SELECT Blockchain Security 2Go starter kit')
     aid = bytes.fromhex('D2760000041502000100000001')
     r = reader.transceive(b'\x00\xA4\x04\x00', aid).check()
 
@@ -121,7 +120,7 @@ def generate_signature(reader, key_id, hash):
     already hashed data.
 
     If a PIN is enabled on the card, a PIN session must be in
-    progress to use ``generate_key_from_seed``. See ``verify_pin``
+    progress to use ``encrypted_keyimport``. See ``verify_pin``
     for more information.
 
     Args:
@@ -164,7 +163,7 @@ def generate_signature(reader, key_id, hash):
     logger.debug('global count %d, count %d, signature %s', global_counter, counter, signature.hex())
     return (global_counter, counter, signature)
 
-def generate_key_from_seed(reader, seed):
+def encrypted_keyimport(reader, seed):
     """ Sends command to derive key from given seed
 
     The card will reproducibly generate a key from the
@@ -176,7 +175,7 @@ def generate_key_from_seed(reader, seed):
     `NIST SP 800-38B`_.
 
     If a PIN is enabled on the card, a PIN session must be in
-    progress to use ``generate_key_from_seed``. See ``verify_pin``
+    progress to use ``encrypted_keyimport``. See ``verify_pin``
     for more information.
 
     Args:

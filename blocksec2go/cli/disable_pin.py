@@ -2,9 +2,9 @@ import sys
 import json
 import argparse
 
-from blocks2go.comm import open_pyscard, CardError
-from blocks2go.commands import select_app, change_pin, unlock_pin
-from blocks2go.util import bytes_from_hex
+from blocksec2go.comm import open_pyscard, CardError
+from blocksec2go import select_app, change_pin, unlock_pin
+from blocksec2go.util import bytes_from_hex
 
 def _disable_pin(args):
     reader = open_pyscard(args.reader)
@@ -18,6 +18,6 @@ def _disable_pin(args):
         print('OK - unlocked')
 
 def add_subcommand(subparsers):
-    parser = subparsers.add_parser('disable_pin', description='Disable the PIN on a card')
+    parser = subparsers.add_parser('disable_pin', description='Disable PIN on a card')
     parser.set_defaults(func=_disable_pin)
     parser.add_argument('pin', help='current PIN')

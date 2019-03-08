@@ -2,9 +2,9 @@ import sys
 import json
 import argparse
 
-from blocks2go.comm import open_pyscard, CardError
-from blocks2go.commands import select_app, verify_pin, generate_signature
-from blocks2go.util import bytes_from_hex
+from blocksec2go import open_pyscard, CardError
+from blocksec2go import select_app, verify_pin, generate_signature
+from blocksec2go.util import bytes_from_hex
 
 def _generate_signature(args):
     reader = open_pyscard(args.reader)

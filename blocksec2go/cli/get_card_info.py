@@ -2,11 +2,12 @@ import sys
 import json
 import argparse
 
-from blocks2go.comm import open_pyscard, CardError
-from blocks2go.commands import select_app
+from blocksec2go import open_pyscard, CardError
+from blocksec2go import select_app
 
-def _card_info(args):
+def _get_card_info(args):
 	reader = open_pyscard(args.reader)
+
 	(pin_active, card_id, version) = select_app(reader)
 
 	if args.machine_readable:
@@ -21,5 +22,5 @@ def _card_info(args):
 		print('Version: ' + version)
 
 def add_subcommand(subparsers):
-	parser = subparsers.add_parser('card_info', description='Retrieve card information')
-	parser.set_defaults(func=_card_info)
+	parser = subparsers.add_parser('get_card_info', description='Retrieve card information')
+	parser.set_defaults(func=_get_card_info)
