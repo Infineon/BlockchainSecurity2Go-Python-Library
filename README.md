@@ -1,4 +1,4 @@
-# Python Library for Infineon's Blockchain Security 2Go Starter Kit 
+# Python Library for Infineon's Blockchain Security 2Go starter kit 
 
 This package provides basic functions to communicate with Infineon's Blockchain Security 2Go 
 starter kit. It abstracts all of the commands available with the starter kit with some simple 
