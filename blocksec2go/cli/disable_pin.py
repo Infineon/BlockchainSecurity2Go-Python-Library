@@ -3,7 +3,7 @@ import json
 import argparse
 
 from blocksec2go.comm import open_pyscard, CardError
-from blocksec2go.commands import select_app, change_pin, unlock_pin
+from blocksec2go import select_app, change_pin, unlock_pin
 from blocksec2go.util import bytes_from_hex
 
 def _disable_pin(args):
