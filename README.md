@@ -45,11 +45,11 @@ Here is an example of how the command line tool could be used
 
 	$ blocksec2go get_key_info 1
 	  Remaining signatures with card: 999990
-      Remaining signatures with key 1: 0
+      Remaining signatures with key 1: 100000
       Public key (hex, encoded according to SEC1): 0434cfd6b1bb53fc244d4881cf1f0d3b9aee7b6ac28aad8a1648fc514101961b59fa7fc58751d0dc876589e467a63ed1582e240cd18b98d408470679418a647833
 
 	$ blocksec2go generate_signature --pin 1234 1 00112233445566778899AABBCCDDEEFF00112233445566778899AABBCCDDEEFF
-	  Remaining signatures with card: 999990
+	  Remaining signatures with card: 999989
       Remaining signatures with key 1: 99999
       Signature (hex): 3044022049689b91545ba3bc487af7cb7267d19ea4ad8e2e8b093458e06d46837400444702207fe7cd2b6851049afe0f7c4ced0ef35bd9eb5d044c67ed95045b07a10641806c
 
@@ -68,18 +68,3 @@ You can now test the library as if it would have been installed.
 To exit the environment, simply run
 
     $ deactivate
-
-
-
-<!--
-To use from the IFX network just install the package via pip
-
-    $ pip install git+https://bitbucket.vih.infineon.com/scm/~wallnean/python-blocksec2go.git
-
-This will install the library, which can be imported as `blocksec2go`.
-In addition the `bc2go` command will be installed which can be used to communicate
-with the card from the command line.
-To find out more, run
-
-    $ bc2go --help
--->
