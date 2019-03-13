@@ -11,7 +11,7 @@ setup(
   description='Allow for communication with Infineon\'s Blockchain Security 2Go starter kit',
   long_description=long_description,
   long_description_content_type='text/markdown',
-  url='http://github.com/Infineon/PyBlockSec2Go',
+  url='https://github.com/Infineon/BlockchainSecurity2Go-Python-Library',
   license='MIT',
   packages=find_packages(),
   install_requires=[
