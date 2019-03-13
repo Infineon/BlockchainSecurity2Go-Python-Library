@@ -14,7 +14,7 @@ To use this library you need some hardware first:
 a reader that is connected via USB (a list is available at 
 [ccid.apdu.fr](https://ccid.apdu.fr/select_readers/?features=contactless)). 
 
-To use the library you need a Python 3 installation (e.g. from [http://python.org] or via [Anaconda](https://www.anaconda.com/))
+To use the library you need a Python 3 installation (e.g. from http://python.org or via [Anaconda](https://www.anaconda.com/))
 
 Then, the fastest way to install the library is to get it via pip
     $ pip install blocksec2go
