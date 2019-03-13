@@ -19,7 +19,7 @@ To use the library you need a Python 3 installation (e.g. from [http://python.or
 Then, the fastest way to install the library is to get it via pip
     $ pip install blocksec2go
 
-Remark: When installing Python 3>=3.4 the installer program `pip` is automatically installed (see [https://pip.pypa.io/en/stable/installing/]). 
+Remark: When installing Python 3>=3.4 the installer program `pip` is automatically installed (see https://pip.pypa.io/en/stable/installing/). 
 
 This will install the library, which can be imported as `blocksec2go`.
 In addition the `blocksec2go` command will be installed which can be used to communicate with 
