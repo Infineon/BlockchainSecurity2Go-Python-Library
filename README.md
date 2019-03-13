@@ -17,6 +17,7 @@ a reader that is connected via USB (a list is available at
 To use the library you need a Python 3 installation (e.g. from http://python.org or via [Anaconda](https://www.anaconda.com/))
 
 Then, the fastest way to install the library is to get it via pip
+
     $ pip install blocksec2go
 
 Remark: When installing Python 3>=3.4 the installer program `pip` is automatically installed (see https://pip.pypa.io/en/stable/installing/). 
