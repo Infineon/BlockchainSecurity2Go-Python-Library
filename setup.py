@@ -4,7 +4,7 @@ with open('README.md', 'r') as fh:
   long_description = fh.read()
 
 setup(
-  name='blockchain-security-2go-starterkit',
+  name='blockchain-security-2go',
   version='1.0',
   author='Infineon Technologies AG',
   author_email='blockchain@infineon.com',

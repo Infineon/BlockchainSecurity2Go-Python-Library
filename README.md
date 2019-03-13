@@ -14,8 +14,12 @@ To use this library you need some hardware first:
 a reader that is connected via USB (a list is available at 
 [ccid.apdu.fr](https://ccid.apdu.fr/select_readers/?features=contactless)). 
 
-The fastest way to install the library is to get it via pip
+To use the library you need a Python 3 installation (e.g. from [http://python.org] or via [Anaconda](https://www.anaconda.com/))
+
+Then, the fastest way to install the library is to get it via pip
     $ pip install blocksec2go
+
+Remark: When installing Python 3>=3.4 the installer program `pip` is automatically installed (see [https://pip.pypa.io/en/stable/installing/]). 
 
 This will install the library, which can be imported as `blocksec2go`.
 In addition the `blocksec2go` command will be installed which can be used to communicate with 
@@ -24,6 +28,8 @@ the card from the command line.
 To find out more, run
 
     $ blocksec2go --help
+
+The library is tested with Python 3.7.1 and the Identive Cloud 4700 F Dual Interface reader.
 
 ## Usage Example
 ### Python Library
