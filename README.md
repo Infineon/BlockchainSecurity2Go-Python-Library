@@ -13,7 +13,8 @@ To use this library you need some hardware first:
 * a contactless reader to communicate with the contactless smart card. We recommend to use 
 a reader that is connected via USB (a list is available at 
 [ccid.apdu.fr](https://ccid.apdu.fr/select_readers/?features=contactless)). 
-* For Linux, please install the following dependencies (Cross-platform library to access USB devices, Middleware to access a smart card using PC/SC and the CCID (Chip Card Interface Device) driver by the M.U.S.C.L.E. (Movement for the Use of Smart Cards in a Linux Environment) project)
+* For Linux, please install the following dependencies:
+The Cross-platform library to access USB devices, Middleware to access a smart card using PC/SC and the CCID (Chip Card Interface Device) driver by the M.U.S.C.L.E. (Movement for the Use of Smart Cards in a Linux Environment) project
 
     $ sudo apt-get install libusb-dev pcscd libpcsclite-dev libccid
 
