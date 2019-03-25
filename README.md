@@ -39,7 +39,7 @@ The library is tested with Python 3.7.1 and the Identive Cloud 4700 F Dual Inter
 
 ## Usage Example
 ### Python Library
-Go to the [Blockchain Security 2Go repository](https://github.com/Infineon/Blockchain/pc) to find examples of how to use the Python library.
+Go to the [Blockchain Security 2Go repository](https://github.com/Infineon/BlockchainSecurity2Go-Python-Library) to find examples of how to use the Python library.
 
 ### Command Line Tool
 Here is an example of how the command line tool could be used
