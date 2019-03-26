@@ -38,9 +38,6 @@ To find out more, run
 The library is tested with Python 3.7.1 and the Identive Cloud 4700 F Dual Interface reader.
 
 ## Usage Example
-### Python Library
-Go to the [Blockchain Security 2Go repository](https://github.com/Infineon/BlockchainSecurity2Go-Python-Library) to find examples of how to use the Python library.
-
 ### Command Line Tool
 Here is an example of how the command line tool could be used
 
@@ -65,6 +62,10 @@ Here is an example of how the command line tool could be used
       Remaining signatures with key 1: 99999
       Signature (hex): 3044022049689b91545ba3bc487af7cb7267d19ea4ad8e2e8b093458e06d46837400444702207fe7cd2b6851049afe0f7c4ced0ef35bd9eb5d044c67ed95045b07a10641806c
 
+### Python Library
+The command line tool is an abstraction of the Python functions that are delivered by this library. Have a look at the implementation of the commands in [blocksec2go/cli] to see how the functions are used. 
+
+<!-- Go to the [Blockchain Security 2Go repository](https://github.com/Infineon/BlockchainSecurity2Go-Python-Library) to find examples of how to use the Python library. -->
 
 ## Testing
 
