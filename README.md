@@ -14,12 +14,26 @@ To use this library you need some hardware first:
 a reader that is connected via USB (a list is available at 
 [ccid.apdu.fr](https://ccid.apdu.fr/select_readers/?features=contactless)). 
 
-For Linux, please install the following dependencies:
-The Cross-platform library to access USB devices, Middleware to access a smart card using PC/SC and the CCID (Chip Card Interface Device) driver by the M.U.S.C.L.E. (Movement for the Use of Smart Cards in a Linux Environment) project
+### Install Prerequisites
+To use the library you need a Python 3 installation (e.g. from http://python.org or via [Anaconda](https://www.anaconda.com/)). 
+The BlockSec2Go library depends on `pyscard` that requires `swig`. To install `swig` follow the guides at https://github.com/LudovicRousseau/pyscard/blob/master/INSTALL.md or follow the hints below. 
 
-    $ sudo apt-get install libusb-dev pcscd libpcsclite-dev libccid swig
+On Windows, we recommend to use the chocolately package manager:
+* Install the chocolately package manager
+* Open a powershell as administrator mode, run
+```
+choco install swig
+```
+On Linux, run
+```
+sudo apt-get install swig
+```
+For Mac systems, we recommend to use homebrew
+```
+brew install swig
+```
 
-To use the library you need a Python 3 installation (e.g. from http://python.org or via [Anaconda](https://www.anaconda.com/))
+### Install BlockSec2Go
 
 Then, the fastest way to install the library is to get it via pip
 
