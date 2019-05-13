@@ -22,15 +22,15 @@ On Windows, we recommend to use the chocolately package manager:
 * Install the chocolately package manager
 * Open a powershell as administrator mode, run
 ```
-choco install swig
+$ choco install swig
 ```
 On Linux, run
 ```
-sudo apt-get install swig
+$ sudo apt-get install swig
 ```
 For Mac systems, we recommend to use homebrew
 ```
-brew install swig
+$ brew install swig
 ```
 
 ### Install BlockSec2Go
