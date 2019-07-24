@@ -15,11 +15,11 @@ def find_reader(reader_name):
     Returns:
         reader:
             :obj:`PyScardReader`: PyScard wrapper object.
-            Chooses first reader with that name if multiple 
+            Chooses first reader with specified name if multiple 
             readers are found.
 
     Raises:
-        ReaderError: No reader found with that name.
+        ReaderError: No reader found with specified name.
         
         Any exceptions thrown by the reader wrapper are passed through.
     """
