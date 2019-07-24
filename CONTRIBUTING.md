@@ -10,7 +10,7 @@ File an issue to ask a question.
 
 ## How Can I Contribute?
 ### Report a Bug or Problem
-Do you find a bug?
+Did you find a bug?
 * Ensure that the bug was not already reported by searching it under [issues](https://github.com/Infineon/BlockchainSecurity2Go-Python-Library/Issues)
 * If you do not find an open issue, [open a new one](https://github.com/Infineon/BlockchainSecurity2Go-Python-Library/issues/new). Be sure to include a *title and clear description* and as much relevant information as possible including a *code sample* or an *executable test case* that demonstrate the problem. 
 
