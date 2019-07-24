@@ -14,9 +14,9 @@ def find_reader(reader_name):
 
     Returns:
         reader:
-            :obj:`PyScardReader`: A card reader with the name 
-            "reader_name". Chooses first reader with that name 
-            if multiple found.
+            :obj:`PyScardReader`: PyScard wrapper object.
+            Chooses first reader with that name if multiple 
+            readers are found.
 
     Raises:
         ReaderError: No reader found with that name.
