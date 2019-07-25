@@ -19,7 +19,7 @@ def find_reader(reader_name):
             readers are found.
 
     Raises:
-        ReaderError: No reader found with specified name.
+        RuntimeError: No reader found with specified name.
         
         Any exceptions thrown by the reader wrapper are passed through.
     """
@@ -30,8 +30,8 @@ def find_reader(reader_name):
             try:
                 return open_pyscard(r[r.index(reader)])
             except:
-                raise Exception('No card on reader')
-    raise Exception('No reader found')
+                raise RuntimeError('No card on reader')
+    raise RuntimeError('No reader found')
 
 def select_app(reader):
     """ Sends command to select the Blockchain Security2GO application
