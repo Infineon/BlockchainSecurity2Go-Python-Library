@@ -1,6 +1,38 @@
 import logging
 logger = logging.getLogger(__name__)
 
+from smartcard.System import readers
+from blocksec2go.comm.pyscard import open_pyscard
+
+def find_reader(reader_name):
+    """ Looks for a specific card reader
+
+    Tries to find a card reader with specified name.
+
+    Args:
+        reader_name (str): string providing name of reader
+
+    Returns:
+        reader:
+            :obj:`PyScardReader`: PyScard wrapper object.
+            Chooses first reader with specified name if multiple 
+            readers are found.
+
+    Raises:
+        RuntimeError: No reader found with specified name.
+        
+        Any exceptions thrown by the reader wrapper are passed through.
+    """
+    logger.debug('FIND READER name %s', reader_name)
+    r = readers()
+    for reader in r:
+        if reader_name in str(reader):
+            try:
+                return open_pyscard(r[r.index(reader)])
+            except:
+                raise RuntimeError('No card on reader')
+    raise RuntimeError('No reader found')
+
 def select_app(reader):
     """ Sends command to select the Blockchain Security2GO application
 
