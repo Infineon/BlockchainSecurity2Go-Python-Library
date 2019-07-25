@@ -6,7 +6,7 @@ if('__main__' == __name__):
   while(reader == None):
     try:
       reader = blocksec2go.find_reader(reader_name)
-      print('Found the specified reader and a card!')
+      print('Found the specified reader and a card!', end='\r')
     except Exception as details:
       if('No reader found' == str(details)):
         print('No card reader found!     ', end='\r')
@@ -17,6 +17,7 @@ if('__main__' == __name__):
         raise SystemExit
   try:
     pin_active, card_id, version = blocksec2go.select_app(reader)
+    print('Found the specified reader and a BlockSec2Go card!')
   except Exception as details:
     print('ERROR:', details)
     raise SystemExit
