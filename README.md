@@ -4,7 +4,7 @@ This package provides basic functions to communicate with Infineon's Blockchain 
 starter kit. It abstracts all of the commands available with the starter kit with some simple 
 functions. 
 
-To get more information about the starter kit go to [https://github.com/Infineon/blockchain].
+To get more information about the starter kit go to https://github.com/Infineon/blockchain.
 
 ## Getting Started
 To use this library you need some hardware first:
