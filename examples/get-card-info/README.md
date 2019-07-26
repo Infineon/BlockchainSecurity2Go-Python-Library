@@ -30,7 +30,7 @@ Before you run the example script on your machine make sure to replace the strin
 
 Your output should look something like:
 
-    Found the specified reader and a Blockchain Security 2Go card
+    Found the specified reader and a Blockchain Security 2Go card!
     Is PIN enabled? False
     Card ID (hex): 02090c2900020027000c
     Version: v1.0
