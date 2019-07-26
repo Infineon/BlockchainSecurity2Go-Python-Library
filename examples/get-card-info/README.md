@@ -1,6 +1,6 @@
 # Getting basic card information example
 
-This example shows you how with just a few lines of code you can get the basic card information of your BlockSecurity2Go card.
+This example shows you how with just a few lines of code you can get the basic card information of your Blockchain Security 2Go card.
 
 First the main blocksec2go library will be imported, since it provides us with an easy way to talk with the card reader and more importantly with the card itself:
 
@@ -18,17 +18,17 @@ For this example the card reader uTrust 3700 F by the company Identiv was used:
 
 This function returns us the reader as an object to be used with other commands from the blocksec2go library.
 
-The command `select_app(reader)` has to be used in every application that tries to communicate with the BlockSec2Go card because it activates all the Blockchain commands on the card. It also simultaneously returns us some basic information about the card in form of a tuple:
+The command `select_app(reader)` has to be used in every application that tries to communicate with the Blockchain Security 2Go card because it activates all the Blockchain commands on the card. It also simultaneously returns us some basic information about the card in form of a tuple:
 
     pin_active, card_id, version = blocksec2go.select_app(reader)
 
 The bool `pin_active` that tells us if the card is locked with a PIN code.  
-The variable `card_id` is a unique card identifier which corresponds to that specific BlockSec2Go card.  
+The variable `card_id` is a unique card identifier which corresponds to that specific Blockchain Security 2Go card.  
 The string `version` shows the card firmware version.
 
-Before you run the example script on your machine make sure to replace the string from `reader_name` with the name of your card reader. Also make sure that everything is connected and the BlockSec2Go card is placed properly on the reader.
+Before you run the example script on your machine make sure to replace the string from `reader_name` with the name of your card reader. Also make sure that everything is connected and the Blockchain Security 2Go card is placed properly on the reader.
 
-Your Output should look something like:
+Your output should look something like:
 
     Found the specified reader and a card!
     Is PIN enabled? True
