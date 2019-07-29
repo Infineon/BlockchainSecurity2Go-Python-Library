@@ -17,7 +17,7 @@ if('__main__' == __name__):
         raise SystemExit
   try:
     pin_active, card_id, version = blocksec2go.select_app(reader)
-    print('Found the specified reader and a BlockSec2Go card!')
+    print('Found the specified reader and a Blockchain Security 2Go card!')
   except Exception as details:
     print('ERROR:', details)
     raise SystemExit
