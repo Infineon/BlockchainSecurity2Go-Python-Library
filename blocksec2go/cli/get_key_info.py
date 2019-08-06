@@ -2,7 +2,7 @@ import sys
 import json
 import argparse
 
-from blocksec2go.comm import open_pyscard, CardError
+from blocksec2go import open_pyscard, CardError
 from blocksec2go import select_app, get_key_info
 
 def _get_key_info(args):
