@@ -31,13 +31,17 @@ if('__main__' == __name__):
   mode = input('What would you like to do? ("Set pin", "Change pin", "Unlock pin" or "Verify pin")\n')
   try:
     if('Set pin' == mode):
-      puk = blocksec2go.set_pin(reader, input('Please enter a new PIN: '))
+      pin = input('Please enter a new PIN: ')
+      puk = blocksec2go.set_pin(reader, pin)
       print('PUK to unlock card (hex): ' + puk.hex())
     elif('Change pin' == mode):
-      puk = blocksec2go.change_pin(reader, input('Please enter PIN: '), input('Please enter a new PIN: '))
+      old_pin = input('Please enter PIN: ')
+      new_pin = input('Please enter a new PIN: ')
+      puk = blocksec2go.change_pin(reader, old_pin, new_pin)
       print('New PUK to unlock card (hex): ' + puk.hex())
     elif('Unlock pin' == mode):
-      status = blocksec2go.unlock_pin(reader, bytes.fromhex(input('Please enter PUK: ')))
+      puk = input('Please enter PUK: ')
+      status = blocksec2go.unlock_pin(reader, bytes.fromhex(puk))
       if((True == status) and (isinstance(status, bool))):
         print('OK - Unlocked!')
       elif(0 != status):
@@ -45,7 +49,8 @@ if('__main__' == __name__):
       else:
         print('ERROR - Card locked!')
     elif('Verify pin' == mode):
-      status = blocksec2go.verify_pin(reader, input('Please enter PIN: '))
+      pin = input('Please enter PIN: ')
+      status = blocksec2go.verify_pin(reader, pin)
       if((True == status) and (isinstance(status, bool))):
         print('OK - Verified!')
       elif(0 != status):
