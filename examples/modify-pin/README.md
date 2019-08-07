@@ -6,7 +6,7 @@ This example shows you the functionality and usage of the following four command
 * [unlock_pin](#unlock_pin-command) - Removes PIN code using the corresponding PUK
 * [verify_pin](#verify_pin-command) - Verifies a PIN code and enables the `generate_signature` command
 
-The contents of `get_reader()` and `activate_card(reader)` have already been covered in the previous example [get-card-info](../blob/master/examples/get-card-info). Please reference that example if something is unclear in these functions.
+The contents of `get_reader()` and `activate_card(reader)` have already been covered in the previous example [get-card-info](../get-card-info). Please reference that example if something is unclear in these functions.
 
 ## set_pin command
 The `set_pin(reader, pin)` command is used to set a new PIN code on the Blockchain Security 2Go card. The PIN code has to have a minimum length of 4 and can not exceed a maximum length of 62 bytes. Example PIN codes may look like: `1234`, `abcd`, `1234abcd`, `Even this sentence can work as a PIN code!`. Like every PIN code you should try to make it secure and unpredictable. After using the command it is highly recommended to always store the returned PUK. This PUK has to be used in case the PIN gets locked (PIN entered incorrectly 3 times). Running the example and selecting the "Set pin" instruction will result in an output similar to:
@@ -51,7 +51,7 @@ The functions [change_pin](#change_pin-command) and [unlock_pin](#unlock_pin-com
 The value of `temp_pin` is completely irrelevant since it will in any case be removed in the next line.
 
 ## verify_pin command
-The `verify_pin(reader, pin)` command is used to check the PIN code and it simultaneously enables the usage of the command `generate_signature`. To get more information on the latter, please refer to the example [generate-signature](../blob/master/examples/generate-signature). Using the function `verify_pin(reader, pin)` returns a boolean which is `True` if the PIN was correct. If it was not correct it will return an integer with the remaining tries left. Running the example and selecting the "Verify pin" instruction will result in an output that should look like:
+The `verify_pin(reader, pin)` command is used to check the PIN code and it simultaneously enables the usage of the command `generate_signature`. To get more information on the latter, please refer to the example [generate-signature](../generate-signature). Using the function `verify_pin(reader, pin)` returns a boolean which is `True` if the PIN was correct. If it was not correct it will return an integer with the remaining tries left. Running the example and selecting the "Verify pin" instruction will result in an output that should look like:
 
 	Found the specified reader and a Blockchain Security 2Go card!
 	What would you like to do? ("Set pin", "Change pin", "Unlock pin" or "Verify pin")
