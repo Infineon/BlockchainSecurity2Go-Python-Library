@@ -2,7 +2,7 @@
 
 This example shows you how to generate new keypairs (public and private keys) and how to recieve important information such as how many signatures the card/key has left or the uncompressed public key corresponding to a specific keyslot.
 
-The contents of `get_reader()` and `activate_card(reader)` have already been covered in the previous example [get-card-info](../blob/master/examples/get-card-info). Please reference that example if something is unclear in these functions.
+The contents of `get_reader()` and `activate_card(reader)` have already been covered in the previous example [get-card-info](../get-card-info). Please reference that example if something is unclear in these functions.
 
 By default the Blockchain Security 2Go card does not come with any preloaded keys. If this is your first time using the card you have to tell it to generate a keypair using the command `generate_keypair(reader)`:
 
