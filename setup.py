@@ -15,7 +15,7 @@ setup(
   license='MIT',
   packages=find_packages(),
   install_requires=[
-    'pyscard'
+    'pyscard',
     'cryptography'
   ],
   entry_points={
