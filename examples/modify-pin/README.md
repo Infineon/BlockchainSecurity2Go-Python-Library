@@ -42,7 +42,7 @@ The `unlock_pin(reader, bytes.fromhex(puk))` command is used to deactivate the P
 
 Keep in mind that having no PIN is less secure than using a PIN and therefore it is strongly recommended that you always have a PIN enabled.
 
-The functions [change_pin](#change_pin-command) and [unlock_pin](#unlock_pin-command) can be used together to reset the PIN if for example the PIN value on the card is known but the PUK is lost:
+Under certain circumstances, for example if you lost the PUK but the PIN is still known, then the functions [change_pin](#change_pin-command) and [unlock_pin](#unlock_pin-command) can be used together to reset the PIN:
 
 	temp_pin = "1234"
 	temp_puk = blocksec2go.change_pin(reader, known_pin, temp_pin)
