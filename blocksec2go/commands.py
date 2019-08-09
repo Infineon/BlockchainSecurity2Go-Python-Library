@@ -202,6 +202,22 @@ def generate_signature(reader, key_id, hash):
 def verify_signature(key, hash, signature):
     """ Verification command to check signature
 
+    Verifies a signature which is returned by ``generate_signature``
+    using a public key and the hashed message. The returned value
+    is a True boolean if the signature is verified correctly, but
+    returns a InvalidSignature exception if incorrect.
+
+    Args:
+        key (bytes): `SEC1`_ encoded uncompressed public key
+        hash (bytes): 32 byte long hash which was signed
+        signature (bytes): DER encoded signature
+    
+    Returns:   
+        verification:
+            boolean: True if signature gets verified correctly
+    
+    Raises:
+        Any exceptions thrown by the cryptography wrapper are passed through.
     """
     logger.debug('VERIFY SIGNATURE public key %s, hash %s, signature %s', key.hex(), hash.hex(), signature.hex())
 
