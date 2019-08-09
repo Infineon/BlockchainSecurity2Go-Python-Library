@@ -9,18 +9,18 @@ This example shows you the functionality and usage of the following four command
 The contents of `get_reader()` and `activate_card(reader)` have already been covered in the example [get-card-info](../get-card-info). Please reference the previous example if something is unclear in these functions.
 
 ## set_pin command
-The `set_pin(reader, pin)` command is used to set a new PIN on the Blockchain Security 2Go card. The PIN value has to have a minimum length of 4 and can not exceed a maximum length of 62 bytes. Example PIN values may look like: `1234`, `abcd`, `1234abcd`, `Even this sentence can work as a PIN!`. Like every PIN you should try to make it secure and unpredictable. After using the command it is highly recommended to always store the returned PUK. This PUK has to be used in case the PIN gets locked (PIN entered incorrectly 3 times). Running the example and selecting the "Set pin" instruction will result in an output similar to:
+The `set_pin(reader, pin)` command is used to set a new PIN on the Blockchain Security 2Go card. The PIN value uses UTF-8 encoding and has to have a minimum length of 4 but can not exceed a maximum length of 62 bytes. Example PIN values may look like: `1234`, `abcd`, `1234abcd`, `Even this sentence can work as a PIN!`. Like every PIN you should try to make it secure and unpredictable. After using the command it is highly recommended to always store the returned PUK. This PUK has to be used in case the PIN gets locked (PIN entered incorrectly 3 times). Running the example and selecting the "Set pin" instruction will result in an output similar to:
 
-    Found the specified reader and a Blockchain Security 2Go card!
-    What would you like to do? ("Set pin", "Change pin", "Unlock pin" or "Verify pin")
-    Set pin
-    Please enter a new PIN: 1234
+  Found the specified reader and a Blockchain Security 2Go card!
+  What would you like to do? ("Set pin", "Change pin", "Unlock pin" or "Verify pin")
+  Set pin
+  Please enter a new PIN: 1234
 	PUK to unlock card (hex): dd401ad08a1f0dcd
 
 Note that if the card already has a PIN, then executing this line will return an error. 
 
 ## change_pin command
-The `change_pin(reader, old_pin, new_pin)` command is used to change the current PIN value on the Blockchain Security 2Go card with a new PIN value. Same as with the [set_pin](#set_pin-command) command it is very recommended to store the new PUK which was returned. Running the example and selecting the "Change pin" instruction will result in an output similar to:
+The `change_pin(reader, old_pin, new_pin)` command is used to change the current PIN value on the Blockchain Security 2Go card to a new PIN value. Same as with the [set_pin](#set_pin-command) command it is very recommended to store the new PUK which was returned. Running the example and selecting the "Change pin" instruction will result in an output similar to:
 
 	Found the specified reader and a Blockchain Security 2Go card!
 	What would you like to do? ("Set pin", "Change pin", "Unlock pin" or "Verify pin")
@@ -40,7 +40,7 @@ The `unlock_pin(reader, bytes.fromhex(puk))` command is used to deactivate the P
 	Please enter PUK: dd401ad08a1f0dcd
 	OK - Unlocked!
 
-Keep in mind that having no PIN is unsecure and therefore it is strongly recommended that you always have a PIN enabled.
+Keep in mind that having no PIN is less secure than using a PIN and therefore it is strongly recommended that you always have a PIN enabled.
 
 The functions [change_pin](#change_pin-command) and [unlock_pin](#unlock_pin-command) can be used together to reset the PIN if for example the PIN value on the card is known but the PUK is lost:
 
