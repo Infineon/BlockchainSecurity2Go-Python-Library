@@ -16,6 +16,7 @@ setup(
   packages=find_packages(),
   install_requires=[
     'pyscard'
+    'cryptography'
   ],
   entry_points={
     'console_scripts': [
