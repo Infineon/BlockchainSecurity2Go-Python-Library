@@ -4,6 +4,10 @@ logger = logging.getLogger(__name__)
 from smartcard.System import readers
 from blocksec2go.comm.pyscard import open_pyscard
 
+from cryptography.hazmat.primitives.asymmetric import ec
+from cryptography.hazmat.primitives.asymmetric import utils
+from cryptography.hazmat.primitives import hashes
+
 def find_reader(reader_name):
     """ Looks for a specific card reader
 
@@ -194,6 +198,15 @@ def generate_signature(reader, key_id, hash):
     signature = r.resp[8:]
     logger.debug('global count %d, count %d, signature %s', global_counter, counter, signature.hex())
     return (global_counter, counter, signature)
+
+def verify_signature(key, hash, signature):
+    """ Verification command to check signature
+
+    """
+    logger.debug('VERIFY SIGNATURE public key %s, hash %s, signature %s', key.hex(), hash.hex(), signature.hex())
+
+    public_key = ec.EllipticCurvePublicKey.from_encoded_point(ec.SECP256K1(), key)
+    return public_key.verify(signature, hash, ec.ECDSA(utils.Prehashed(hashes.SHA256()))) == None
 
 def encrypted_keyimport(reader, seed):
     """ Sends command to derive key from given seed
