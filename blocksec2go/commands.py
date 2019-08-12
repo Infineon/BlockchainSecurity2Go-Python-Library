@@ -2,11 +2,27 @@ import logging
 logger = logging.getLogger(__name__)
 
 from smartcard.System import readers
+from blocksec2go.comm.card_observer import card_observer
 from blocksec2go.comm.pyscard import open_pyscard
 
 from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.hazmat.primitives.asymmetric import utils
 from cryptography.hazmat.primitives import hashes
+
+def add_callback(connect, disconnect):
+    """ Add callbacks
+
+    Adds function callbacks to ``CardObserver`` class
+
+    Args:
+        connect (func): Function to call when card gets connected
+        disconnect (func): Function to call when card gets disconnected
+
+    Returns:
+    Raises:
+    """
+    card_observer.connect = connect
+    card_observer.disconnect = disconnect
 
 def find_reader(reader_name):
     """ Looks for a specific card reader
