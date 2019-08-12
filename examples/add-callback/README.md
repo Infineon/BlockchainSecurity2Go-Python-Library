@@ -32,4 +32,10 @@ Apart from the problem mentioned above you would also still need the `reader` ob
         reader = get_reader()
         activate_card(reader)
 
-You can press the "Enter" button at any time on your Keyboard to stop the monitoring process and close the program.
+You can press the "Enter" button on your keyboard at any time to stop the monitoring process and close the program. An example output would look like this:
+
+    Insert a Blockchain Security 2Go card onto the reader!
+    Press Enter at any time to exit the program!
+    A smartcard is connected to the reader!
+    Found the specified reader and a Blockchain Security 2Go card!
+    The card disconnected from the reader!
