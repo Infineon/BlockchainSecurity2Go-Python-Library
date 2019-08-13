@@ -11,7 +11,7 @@ To use the `generate_signature(reader, key_id, hash)` command we first need a ha
 
 It is important that we leave the hashed message in bytes since this is the format the card accepts.
 
-Next, we need a keypair which will be used to sign the hashed message. Please be sure to validate the keypair using the function `is_key_valid(reader, key_id)` since otherwise there is no private key for the signing process.
+Next, we need a keypair which will be used to sign the hashed message. Please be sure to validate the keypair using the function `is_key_valid(reader, key_id)` since otherwise there is a chance that there is no private key for the signing process.
 
 After a hashed message and a valid keypair exist we can proceed to actually generate a signature:
 
