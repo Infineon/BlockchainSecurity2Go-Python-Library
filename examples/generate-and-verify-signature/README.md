@@ -1,17 +1,17 @@
-# Generating and verify a signature
+# Generate and verify a signature
 
-This examples shows you how to generate a signature on the Blockchain Security 2Go card and how to verify a signature using the blocksec2go library.
+This examples shows you to generate a signature on the Blockchain Security 2Go card and how to verify a signature using the blocksec2go library.
 
-The contents of `get_reader()` and `activate_card(reader)` have already been covered in the previous example [get-card-info](../get-card-info). The content of `get_public_key(key_id)` has already been covered in the previous example [get_key_info](../get-key-info). Please reference those examples if something is unclear in these functions.
+The contents of `get_reader()` and `activate_card(reader)` have already been covered in the example [get-card-info](../get-card-info) and the content of `get_public_key(key_id)` in the example [get_key_info](../get-key-info). Please reference those earlier examples if something is unclear in these functions.
 
-To use the `generate_signature(reader, key_id, hash)` cpmmand we first need a hashed message that should be signed using the card. In the example we used "Hello World!" as our message and hashed it using the SHA256 algorithm:
+To use the `generate_signature(reader, key_id, hash)` command we first need a hashed message that should be signed using the card. In the example we used "Hello World!" as our message and hashed it using the SHA256 algorithm:
 
     hash_object = hashlib.sha256(b'Hello World!')
     hash = hash_object.digest()
 
 It is important that we leave the hashed message in bytes since this is the format the card accepts.
 
-Next we need a keypair which will be used to sign the hashed message. Please only choose existing keypairs since otherwise there is no private key for the signing process.
+Next, we need a keypair which will be used to sign the hashed message. Please only choose existing keypairs since otherwise there is no private key for the signing process.
 
 After a hashed message and a valid keypair exists we can proceed to actually generating a signature:
 
