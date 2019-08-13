@@ -27,11 +27,14 @@ def activate_card(reader):
     print('ERROR: ' + str(details))
     raise SystemExit
 
-def get_public_key(key_id):
+def get_public_key(reader, key_id):
   try:
-    global_counter, counter, key = blocksec2go.get_key_info(reader, key_id)
-    print('Public key (hex, encoded according to SEC1): ' + key.hex())
-    return key
+    if(blocksec2go.is_key_valid(reader, key_id)):
+      global_counter, counter, key = blocksec2go.get_key_info(reader, key_id)
+      print('Public key (hex, encoded according to SEC1): ' + key.hex())
+      return key
+    else:
+      raise RuntimeError('Key_id is invalid!')
   except Exception as details:
     print('ERROR: ' + str(details))
     raise SystemExit
@@ -45,7 +48,7 @@ if('__main__' == __name__):
   print('Hashed message:', hash.hex())
 
   key_id = int(input('Which key would you like to use? (Numbers 1 - 255 only!)\n'))
-  public_key = get_public_key(key_id)
+  public_key = get_public_key(reader, key_id)
 
   try:
     global_counter, counter, signature = blocksec2go.generate_signature(reader, key_id, hash)
