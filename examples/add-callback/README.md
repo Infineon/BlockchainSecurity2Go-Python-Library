@@ -12,9 +12,9 @@ It is very important to store the `cardmonitor` and `cardobserver` object since 
 
     observer.stop(cardmonitor, cardobserver)
 
-Please dont forget to stop the monitoring since this can lead to issues with the reader if left open.
+Please do not forget to stop the monitoring since this can lead to issues with the reader if left open.
 
-Using the `add_callback(connect = connected, disconnect = disconnected)` function we are able to add the function `connected(self)` as a callback when a smarcard gets inserted and add the function `disconnected(self)` as a callback when a card gets removed:
+Using the `add_callback(connect = connected, disconnect = disconnected)` function we are able to add the function `connected(self)` as a callback when a smartcard gets inserted and add the function `disconnected(self)` as a callback when a card gets removed:
 
     def connected(self):
     ...
@@ -23,9 +23,9 @@ Using the `add_callback(connect = connected, disconnect = disconnected)` functio
     blocksec2go.add_callback(connect = connected, disconnect = disconnected)
 
 
-Be careful of the fact that at the time when a callback gets triggered there is no guarantee that there is a Blockchain Security 2Go card present or that a Blockchain Security 2Go card was removed. You need to manually check which card reader was affected by the callback or if the card that was inserted was actually a Blockchain Security 2Go card. This is because the callbacks happen whenever any smartcard gets inserted/removed!
+Be careful of the fact that the insertion and removal of any smartcard on any reader also triggers the callbacks above. You need to manually check if the inserted or removed card was a Blockchain Security 2Go card.
 
-Apart from the problem mentioned above you would also still need the `reader` object which is used by the other commands in the  blocksec2go library:
+Additionally you also need the `reader` object which is used by the other commands in the  blocksec2go library:
 
     def connected(self):
         print('A smartcard is connected to the reader!')
@@ -38,4 +38,4 @@ You can press the "Enter" button on your keyboard at any time to stop the monito
     Press Enter at any time to exit the program!
     A smartcard is connected to the reader!
     Found the specified reader and a Blockchain Security 2Go card!
-    The card disconnected from the reader!
+    The card is disconnected from the reader!

@@ -34,7 +34,7 @@ def connected(self):
   activate_card(reader)
 
 def disconnected(self):
-  print('The card disconnected from the reader!')
+  print('The card is disconnected from the reader!')
 
 if('__main__' == __name__):
   print("Insert a Blockchain Security 2Go card onto the reader!")
