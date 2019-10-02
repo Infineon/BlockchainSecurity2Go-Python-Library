@@ -162,6 +162,30 @@ def get_key_info(reader, key_id):
     logger.debug('global count %d, count %d, public key %s', global_counter, counter, key.hex())
     return (global_counter, counter, key)
 
+def is_key_valid(reader, key_id):
+    """ Validate retrieved keypair information
+
+    Args:
+        reader (:obj:): object providing reader communication
+        key_id (int): key ID as returned by ``generate_keypair``
+    
+    Returns:
+        key_valid:
+            bool: True if key is valid, else false
+    
+    Raises:
+        RuntimeError: Entered key_id is outside of keypair scope.
+        
+        Any exceptions thrown by the reader wrapper are passed through.
+    """
+    logger.debug('IS KEY VALID key %d', key_id)
+    if key_id < 0 or key_id > 255:
+        raise RuntimeError('Invalid key_id: ' + str(key_id))
+    global_counter, counter, key = get_key_info(reader, key_id)
+    if(0 == global_counter): return False
+    elif(0 == counter): return False
+    else: return True
+
 def generate_signature(reader, key_id, hash):
     """ Send command to calculate signature
 
