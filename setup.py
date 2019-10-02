@@ -5,7 +5,7 @@ with open('README.md', 'r') as fh:
 
 setup(
   name='blocksec2go',
-  version='1.1',
+  version='1.2',
   author='Infineon Technologies AG',
   author_email='blockchain@infineon.com',
   description='Allow for communication with Infineon\'s Blockchain Security 2Go starter kit',
